@@ -219,12 +219,14 @@ def evaluate(current_board):
     return 0
 
 
-def minmax(current_board, depth, is_max):
-    score = evaluate(current_board)
+def minmax(current_board, is_max):
 
+    # checking if minmax function have reached end of the current game
+    score = evaluate(current_board)
     if score == 10 or score == -10: 
         return score
 
+    # checking if the board is not full 
     if is_move_left(current_board) == False:
         return 0
 
@@ -234,7 +236,7 @@ def minmax(current_board, depth, is_max):
             for j in range(3):
                 if current_board[i][j] == 'empty':
                     current_board[i][j] = player
-                    best_score = max(best_score, minmax(current_board, depth+1, not is_max))
+                    best_score = max(best_score, minmax(current_board, not is_max))
                     current_board[i][j] = 'empty'
 
         return best_score
@@ -245,7 +247,7 @@ def minmax(current_board, depth, is_max):
             for j in range(3):
                 if current_board[i][j] == 'empty':
                     current_board[i][j] = AI
-                    best_score = min(best_score, minmax(current_board, depth+1, not is_max))
+                    best_score = min(best_score, minmax(current_board, not is_max))
                     current_board[i][j] = 'empty'
 
         return best_score
@@ -258,13 +260,13 @@ def find_best_Move(current_board):
         for j in range(3):
             if current_board[i][j] == 'empty':
                 current_board[i][j] = player
-                move_value = minmax(current_board, 0, False)
+                move_value = minmax(current_board, False)
                 current_board[i][j] = 'empty'
 
                 if move_value > best_value:
                     best_value = move_value
                     best_move = (i,j)
-    print("best value is: " + str(best_value))
+    # print("best value is: " + str(best_value))
     return best_move
     
 ################################################################################
