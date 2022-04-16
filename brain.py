@@ -178,20 +178,22 @@ class Game:
         # Rows
         for row in range(3):
             winner = self.equal3(current_board[row][0], current_board[row][1], current_board[row][2])
-
-            if winner == 'O': 
-                return -10
-            elif winner == 'X':
-                return 10
+            
+            if  winner != None:
+                if winner == 'O': 
+                    return -10
+                elif winner == 'X':
+                    return 10
 
         # Columns
         for col in range(3):
             winner = self.equal3(current_board[0][col], current_board[1][col], current_board[2][col])
             
-            if winner == 'O': 
-                return -10
-            elif winner == 'X':
-                return 10
+            if  winner != None:
+                if winner == 'O': 
+                    return -10
+                elif winner == 'X':
+                    return 10
 
         # Corsswis
         winner = self.equal3(current_board[0][0], current_board[1][1], current_board[2][2]) 
